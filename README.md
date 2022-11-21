@@ -10,7 +10,7 @@ To run the app on your machine, run the following from the root dir:
 > yarn dev
 ```
 
-and head to localhost:3000.
+and visit localhost:3000
 
 <br>
 
