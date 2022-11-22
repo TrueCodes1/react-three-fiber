@@ -3,7 +3,7 @@ import { Router, useRouter } from "next/router"
 import { useRef, useState } from "react"
 
 
-export default function Box ({route, ...props}) {
+export default function Box ({route, rotating = true, ...props}) {
     const mesh =  useRef()
     const router = useRouter()
     const [hovered, setHovered] = useState(false)
@@ -11,15 +11,16 @@ export default function Box ({route, ...props}) {
     const [currentGrowth, setCurrentGrowth] = useState<"inc" | "dec">("inc")
 
     useFrame((state, delta) => {
-        // @ts-ignore
-        mesh.current.rotation.y += 0.01
-        // @ts-ignore
-        mesh.current.rotation.x += 0.01
-        // @ts-ignore
-        mesh.current.rotation.z += 0.01
-        
+        if (rotating) {
+            // @ts-ignore
+            mesh.current.rotation.y += 0.01
+            // @ts-ignore
+            mesh.current.rotation.x += 0.01
+            // @ts-ignore
+            mesh.current.rotation.z += 0.01
+        }
         scale < 0.01 && setCurrentGrowth("inc")
-        scale > 20 && setCurrentGrowth("dec")
+        scale > 10 && setCurrentGrowth("dec")
 
         setScale(currentGrowth === "inc" ? scale+0.01 : scale-0.01) 
     })
